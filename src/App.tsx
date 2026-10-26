@@ -29,6 +29,8 @@ import { valueAfter } from "./misc/async";
 import { AppFooter } from "./AppFooter";
 import { AboutModal } from "./AboutModal";
 import { LicenseNoticeModal } from "./misc/LicenseNoticeModal";
+import { Sidebar, View } from "./Sidebar";
+import { Rainy75Panel } from "./rainy75/Rainy75Panel";
 
 declare global {
   interface Window {
@@ -169,6 +171,7 @@ function App() {
   const [showAbout, setShowAbout] = useState(false);
   const [showLicenseNotice, setShowLicenseNotice] = useState(false);
   const [connectionAbort, setConnectionAbort] = useState(new AbortController());
+  const [view, setView] = useState<View>("keymap");
 
   const [lockState, setLockState] = useState<LockState>(
     LockState.ZMK_STUDIO_CORE_LOCK_STATE_LOCKED
@@ -298,6 +301,7 @@ function App() {
           <div className="bg-base-100 text-base-content h-full max-h-[100vh] w-full max-w-[100vw] inline-grid grid-cols-[auto] grid-rows-[auto_1fr_auto] overflow-hidden">
             <AppHeader
               connectedDeviceLabel={connectedDeviceName}
+              view={view}
               canUndo={canUndo}
               canRedo={canRedo}
               onUndo={undo}
@@ -307,7 +311,14 @@ function App() {
               onDisconnect={disconnect}
               onResetSettings={resetSettings}
             />
-            <Keyboard />
+            <div className="grid min-h-0 grid-cols-[56px_1fr] md:grid-cols-[200px_1fr]">
+              <Sidebar view={view} onViewChange={setView} />
+              <main className="min-h-0 overflow-auto">
+                <div className="h-full min-h-0">
+                  {view === "keymap" ? <Keyboard /> : <Rainy75Panel />}
+                </div>
+              </main>
+            </div>
             <AppFooter
               onShowAbout={() => setShowAbout(true)}
               onShowLicenseNotice={() => setShowLicenseNotice(true)}

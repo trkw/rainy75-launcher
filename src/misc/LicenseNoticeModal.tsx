@@ -23,9 +23,8 @@ export const LicenseNoticeModal = ({
       <div>
         <div className="flex justify-between items-start">
           <p className="mr-2">
-            ZMK Studio is released under the open source Apache 2.0 license. A
-            copy of the NOTICE file from the ZMK Studio repository is included
-            here:
+            Rainy75 Launcher is built on ZMK Studio and is released under the
+            Apache 2.0 license. The NOTICE file is included here:
           </p>
           <button
             className="p-1.5 rounded-md bg-gray-100 text-black hover:bg-gray-300"

@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react-swc";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: process.env.GITHUB_ACTIONS ? "/rainy75-launcher/" : "/",
   plugins: [react()],
   // prevent vite from obscuring rust errors
   clearScreen: false,
@@ -27,11 +28,9 @@ export default defineConfig({
     minify: !process.env.TAURI_DEBUG ? "esbuild" : false,
     // produce sourcemaps for debug builds
     sourcemap: !!process.env.TAURI_DEBUG,
-    // include download page
     rollupOptions: {
       input: {
         main: "./index.html",
-        download: "./download.html",
       },
     }
   },

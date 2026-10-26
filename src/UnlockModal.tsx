@@ -35,15 +35,19 @@ export const UnlockModal = ({}: UnlockModalProps) => {
     <GenericModal ref={dialog}>
       <h1 className="text-xl">Unlock To Continue</h1>
       <p>
-        For security reasons, your keyboard requires unlocking before using ZMK
-        Studio.
+        For security reasons, the keyboard must be unlocked before the keymap
+        can be edited.
       </p>
       <p>
-        If studio unlocking hasn't been added to your keymap or a combo, see the{" "}
+        On the Rainy 75, hold <b>Fn</b> and press <b>Esc</b> once. The launcher
+        unlocks as soon as the keyboard reports it.
+      </p>
+      <p>
+        If that combination was removed from your keymap, see the{" "}
         <ExternalLink href="https://zmk.dev/docs/keymaps/behaviors/studio-unlock">
           Studio Unlock Behavior
         </ExternalLink>{" "}
-        documentation for more infomation.
+        documentation.
       </p>
     </GenericModal>
   );

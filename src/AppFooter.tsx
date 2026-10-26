@@ -9,14 +9,29 @@ export const AppFooter = ({
 }: AppFooterProps) => {
   return (
     <div className="grid justify-center p-1 bg-base-200">
-      <div>
-        <span>&copy; 2026 - The ZMK Contributors</span> -{" "}
-        <a className="hover:text-primary hover:cursor-pointer" onClick={onShowAbout}>
-          About ZMK Studio
+      <div className="text-xs">
+        <span>Rainy75 Launcher (unofficial)</span> -{" "}
+        <a
+          className="hover:text-primary hover:cursor-pointer"
+          onClick={onShowAbout}
+        >
+          About
         </a>{" "}
         -{" "}
-        <a className="hover:text-primary hover:cursor-pointer" onClick={onShowLicenseNotice}>
+        <a
+          className="hover:text-primary hover:cursor-pointer"
+          onClick={onShowLicenseNotice}
+        >
           License NOTICE
+        </a>{" "}
+        -{" "}
+        <a
+          className="hover:text-primary hover:cursor-pointer"
+          href="https://github.com/trkw/rainy75-launcher"
+          target="_blank"
+          rel="noreferrer"
+        >
+          GitHub
         </a>
       </div>
     </div>

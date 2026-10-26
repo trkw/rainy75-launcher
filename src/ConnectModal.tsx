@@ -239,19 +239,11 @@ function noTransportsOptionsPrompt() {
       </p>
 
       <div>
-        <p>To use ZMK Studio, either:</p>
+        <p>Open this page in Chrome or Edge. For a Rainy 75:</p>
         <ul className="list-disc list-inside">
-          <li>
-            Use a browser that supports the above web technologies, e.g.
-            Chrome/Edge, or
-          </li>
-          <li>
-            Download our{" "}
-            <ExternalLink href="/download">
-              cross platform application
-            </ExternalLink>
-            .
-          </li>
+          <li>connect USB-C and switch to wired mode (Fn + Tab),</li>
+          <li>press Fn + Esc after connecting to unlock the keymap,</li>
+          <li>use USB; Web Bluetooth is Linux-only.</li>
         </ul>
       </div>
     </div>

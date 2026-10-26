@@ -15,9 +15,12 @@ import { ConnectionContext } from "./rpc/ConnectionContext";
 import { ChevronDown, Undo2, Redo2, Save, Trash2 } from "lucide-react";
 import { Tooltip } from "./misc/Tooltip";
 import { GenericModal } from "./GenericModal";
+import type { View } from "./Sidebar";
+import logo from "./assets/rainy75.svg";
 
 export interface AppHeaderProps {
   connectedDeviceLabel?: string;
+  view?: View;
   onSave?: () => void | Promise<void>;
   onDiscard?: () => void | Promise<void>;
   onUndo?: () => Promise<void>;
@@ -30,6 +33,7 @@ export interface AppHeaderProps {
 
 export const AppHeader = ({
   connectedDeviceLabel,
+  view = "keymap",
   canRedo,
   canUndo,
   onRedo,
@@ -66,9 +70,12 @@ export const AppHeader = ({
 
   return (
     <header className="top-0 left-0 right-0 grid grid-cols-[1fr_auto_1fr] items-center justify-between h-10 max-w-full">
-      <div className="flex px-3 items-center gap-1">
-        <img src="/zmk.svg" alt="ZMK Logo" className="h-8 rounded" />
-        <p>Studio</p>
+      <div className="flex px-3 items-center gap-2">
+        <img src={logo} alt="Rainy 75" className="h-8 rounded" />
+        <p className="font-semibold">Rainy75</p>
+        <span className="hidden text-sm text-base-content/60 sm:inline">
+          Launcher
+        </span>
       </div>
       <GenericModal ref={showSettingsRef} className="max-w-[50vw]">
         <h2 className="my-2 text-lg">Restore Stock Settings</h2>
@@ -123,47 +130,51 @@ export const AppHeader = ({
         </Popover>
       </MenuTrigger>
       <div className="flex justify-end gap-1 px-2">
-        {onUndo && (
-          <Tooltip label="Undo">
-            <Button
-              className="flex items-center justify-center p-1.5 rounded enabled:hover:bg-base-300 disabled:opacity-50"
-              isDisabled={!canUndo}
-              onPress={onUndo}
-            >
-              <Undo2 className="inline-block w-4 mx-1" aria-label="Undo" />
-            </Button>
-          </Tooltip>
-        )}
+        {view === "keymap" && (
+          <>
+            {onUndo && (
+              <Tooltip label="Undo">
+                <Button
+                  className="flex items-center justify-center p-1.5 rounded enabled:hover:bg-base-300 disabled:opacity-50"
+                  isDisabled={!canUndo}
+                  onPress={onUndo}
+                >
+                  <Undo2 className="inline-block w-4 mx-1" aria-label="Undo" />
+                </Button>
+              </Tooltip>
+            )}
 
-        {onRedo && (
-          <Tooltip label="Redo">
-            <Button
-              className="flex items-center justify-center p-1.5 rounded enabled:hover:bg-base-300 disabled:opacity-50"
-              isDisabled={!canRedo}
-              onPress={onRedo}
-            >
-              <Redo2 className="inline-block w-4 mx-1" aria-label="Redo" />
-            </Button>
-          </Tooltip>
+            {onRedo && (
+              <Tooltip label="Redo">
+                <Button
+                  className="flex items-center justify-center p-1.5 rounded enabled:hover:bg-base-300 disabled:opacity-50"
+                  isDisabled={!canRedo}
+                  onPress={onRedo}
+                >
+                  <Redo2 className="inline-block w-4 mx-1" aria-label="Redo" />
+                </Button>
+              </Tooltip>
+            )}
+            <Tooltip label="Save">
+              <Button
+                className="flex items-center justify-center p-1.5 rounded enabled:hover:bg-base-300 disabled:opacity-50"
+                isDisabled={!unsaved}
+                onPress={onSave}
+              >
+                <Save className="inline-block w-4 mx-1" aria-label="Save" />
+              </Button>
+            </Tooltip>
+            <Tooltip label="Discard">
+              <Button
+                className="flex items-center justify-center p-1.5 rounded enabled:hover:bg-base-300 disabled:opacity-50"
+                onPress={onDiscard}
+                isDisabled={!unsaved}
+              >
+                <Trash2 className="inline-block w-4 mx-1" aria-label="Discard" />
+              </Button>
+            </Tooltip>
+          </>
         )}
-        <Tooltip label="Save">
-          <Button
-            className="flex items-center justify-center p-1.5 rounded enabled:hover:bg-base-300 disabled:opacity-50"
-            isDisabled={!unsaved}
-            onPress={onSave}
-          >
-            <Save className="inline-block w-4 mx-1" aria-label="Save" />
-          </Button>
-        </Tooltip>
-        <Tooltip label="Discard">
-          <Button
-            className="flex items-center justify-center p-1.5 rounded enabled:hover:bg-base-300 disabled:opacity-50"
-            onPress={onDiscard}
-            isDisabled={!unsaved}
-          >
-            <Trash2 className="inline-block w-4 mx-1" aria-label="Discard" />
-          </Button>
-        </Tooltip>
       </div>
     </header>
   );
